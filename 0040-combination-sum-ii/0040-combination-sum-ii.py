@@ -10,7 +10,6 @@ def genSum(arr, target_sum, current_sum, index, current_res, res, memo, im):
             memo[z] = 1
         
     if current_sum + arr[index] < target_sum and (current_sum, index+1, tuple(current_res)) not in im:
-        # genSum(arr, target_sum, current_sum+arr[index], index, current_res+[arr[index]], res, memo)
         genSum(arr, target_sum, current_sum+arr[index], index+1, current_res+[arr[index]], res, memo, im)
     genSum(arr, target_sum, current_sum, index+1, current_res, res, memo, im)
 
