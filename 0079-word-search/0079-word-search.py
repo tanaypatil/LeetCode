@@ -1,5 +1,4 @@
 class Solution:
-    glob_memo = {}
     
     def find(self, board, n, m, row, col, path, word, memo):
         if path == word:
@@ -16,7 +15,13 @@ class Solution:
         return False
         
     def exist(self, board: List[List[str]], word: str) -> bool:
-        Solution.glob_memo = {}
+        exists = defaultdict(bool)
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                exists[board[i][j]] = True
+        for w in word:
+            if not exists[w]:
+                return False
         for i in range(len(board)):
             for j in range(len(board[0])):
                 if board[i][j] == word[0]:
