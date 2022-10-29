@@ -21,8 +21,6 @@ class Solution:
             for l in word:
                 word_counts[l] += 1
         
-        # print(counts)
-        # print(word_counts)
         for k, v in counts.items():
             if not word_counts[k]:
                 return False
