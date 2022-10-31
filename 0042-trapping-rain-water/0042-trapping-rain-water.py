@@ -11,7 +11,7 @@ class Solution:
                     break
                     
                 heightVal = min(height[stack[-1]], height[i]) - height[poppedIdx]
-                print(heightVal)
+                # print(heightVal)
                 length = i - stack[-1] - 1
                 total += heightVal * length
             
