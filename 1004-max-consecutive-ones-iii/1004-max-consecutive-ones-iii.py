@@ -15,7 +15,6 @@ class Solution:
         while start < n and end < n:
             while end < n and (nums[end] == 1 or zero_count < k):
                 if not nums[end]: zero_count += 1
-                f = 1
                 end += 1
             max_count = max(max_count, end-start)
             while start < end and zero_count >= k:
