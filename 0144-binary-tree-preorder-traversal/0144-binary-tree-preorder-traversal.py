@@ -1,3 +1,6 @@
+from collections import deque
+
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -15,7 +18,22 @@ class Solution:
         
     
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        Solution.ret = []
-        self.preOrd(root)
-        return Solution.ret
+        # Solution.ret = []
+        # self.preOrd(root)
+        # return Solution.ret
         
+        if not root:
+            return []
+        
+        res = []
+        stack = deque()
+        stack.append(root)
+        
+        while stack:
+            r = stack.pop()
+            res.append(r.val)
+            if r.right:
+                stack.append(r.right)
+            if r.left:
+                stack.append(r.left)
+        return res        
