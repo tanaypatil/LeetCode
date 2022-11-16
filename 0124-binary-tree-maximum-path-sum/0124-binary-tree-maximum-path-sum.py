@@ -10,9 +10,13 @@ def mps(root, m):
     left = mps(root.left, m)
     right = mps(root.right, m)
     
-    m[0] = max(m[0], -9999999999 if left == 'r' else left, -99999999 if right=='r' else right, max(0 if left=='r' else left, 0 if right=='r' else right)+root.val, (0 if left=='r' else left)+(0 if right=='r' else right)+root.val, root.val)
+    m[0] = max(m[0], -9999999999 if left == 'r' else left, -99999999 if right=='r' else right, root.val)
+    left = 0 if left=='r' else left
+    right = 0 if right=='r' else right
     
-    return max(max((0 if left=='r' else left), (0 if right=='r' else right)) + root.val, root.val)
+    m[0] = max(m[0], max(left, right)+root.val, left+right+root.val)
+    
+    return max(max(left, right) + root.val, root.val)
 
 
 class Solution:
