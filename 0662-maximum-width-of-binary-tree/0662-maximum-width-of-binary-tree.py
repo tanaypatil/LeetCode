@@ -9,16 +9,21 @@ from collections import deque
 
 class Solution:
     def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        level_old, num_old, max_width = 1, 1, 0
-        queue = deque([[level_old,num_old,root]])
-
-        while queue:    
-            [num, level, node] = queue.popleft()
-            if level > level_old:
-                level_old, num_old = level, num
-                
-            max_width = max(max_width, num - num_old + 1)
-            if node.left:  queue.append([num*2,  level+1, node.left])
-            if node.right: queue.append([num*2+1,level+1, node.right])
-                
-        return max_width
+        if not root:
+            return 0
+        
+        ret = 1
+        
+        q = deque()
+        q.append((root, 1))
+        
+        while q:
+            s = len(q)
+            ret = max(ret, q[-1][1]-q[0][1]+1)
+            for _ in range(s):
+                node, num = q.popleft()
+                if node.left:
+                    q.append((node.left, 2*num))
+                if node.right:
+                    q.append((node.right, 2*num+1))
+        return ret
