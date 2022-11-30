@@ -22,7 +22,6 @@ class Solution:
         for p in prerequisites:
             Solution.adjl[p[0]].append(p[1])
             
-        print(Solution.adjl)
         Solution.visited = defaultdict(bool)
         Solution.recStack = defaultdict(bool)
         
