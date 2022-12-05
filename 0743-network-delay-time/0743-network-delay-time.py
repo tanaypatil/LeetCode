@@ -11,9 +11,6 @@ class Solution:
         for s, t, w in times:
             adj[s-1][t-1] = w
         while heap:
-            # print(heap)
-            # print(dist)
-            # print()
             we, p = heappop(heap)
             for t, w in adj[p].items():
                 if dist[t] > w + we:
