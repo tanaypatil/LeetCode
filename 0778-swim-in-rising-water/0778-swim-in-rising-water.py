@@ -8,18 +8,15 @@ class Solution:
         
         ma = float('-inf')
         n = len(grid)
-        
         moves = [(0, -1), (0, 1), (-1, 0), (1, 0)]
         visited = defaultdict(bool)
         visited[(0, 0)] = True
         
         while heap:
             v, i, j = heappop(heap)
-            
             if i == n-1 and j == n-1:
                 ma = max(ma, v)
                 return ma
-            
             ma = max(ma, v)
             for x, y in moves:
                 r, c = i+x, j+y
