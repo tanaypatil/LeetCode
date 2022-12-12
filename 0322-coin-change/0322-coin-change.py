@@ -7,7 +7,6 @@ class Solution:
         dp = [0]*(amount+1)
         for i in range(1, amount+1):
             dp[i] = float('inf') if i%coins[0] else i//coins[0]
-        # print(dp)
             
         for i in range(1, len(coins)):
             for j in range(1, amount+1):
