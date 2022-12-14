@@ -1,8 +1,6 @@
 class Solution:
     def dfs(self, index, path):
-        if index >= len(Solution.s):
-            return 1 if path == Solution.t else 0
-        if len(path) >= len(Solution.t):
+        if (index >= len(Solution.s)) or (len(path) >= len(Solution.t)):
             return 1 if path == Solution.t else 0
         if len(Solution.s)-index + len(path) < len(Solution.t):
             return 0
@@ -12,7 +10,6 @@ class Solution:
         if Solution.s[index] == Solution.t[len(path)]:
             taken += self.dfs(index+1, path+Solution.s[index])
         not_taken =  self.dfs(index+1,  path)
-        
         c = taken + not_taken
         Solution.mem[(index, path)] = c
         return c
