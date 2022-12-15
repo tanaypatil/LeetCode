@@ -3,7 +3,6 @@ class Solution:
         def maxProfitK(k, prices):
             n = len(prices)
             prev = [0]*n
-            
             for i in range(k):
                 dp = [0]*n
                 maxDiff = -prices[0]
