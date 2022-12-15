@@ -16,8 +16,7 @@ class Solution:
         m = 1
         for i in range(1, len(words)):
             for j in range(i):
-                if len(words[i])-len(words[j]) == 1 and lcs(words[i], words[j]) == len(words[j]) and dp[i] < 1 + dp[j]:
+                if len(words[i])-len(words[j]) == 1 and dp[i] < 1 + dp[j] and lcs(words[i], words[j]) == len(words[j]):
                     dp[i] = 1+dp[j]
             m = max(m, dp[i])
-        # print(dp)
         return m
