@@ -3,11 +3,44 @@
 class Solution:
     def search(self, pat, txt):
         # code here
-        indexes = []
-        for i, c in enumerate(s):
-            if c == patt[0] and s[i:i+len(patt)] == patt:
-                indexes.append(i+1)
-        return indexes if indexes else [-1]
+        n = len(txt)
+        m = len(pat)
+        
+        pi = [0]*m
+        i, j = 0, 1
+        
+        while i < m and j < m:
+            if pat[j] == pat[i]:
+                pi[j] = i+1
+                i += 1
+            else:
+                i = 0
+            j += 1
+            
+        i = 0  # index for txt[]
+        j = 0
+        ret = []
+        while (n - i) >= (m - j):
+            if pat[j] == txt[i]:
+                i += 1
+                j += 1
+     
+            if j == m:
+                ret.append(i-j+1)
+                j = pi[j-1]
+     
+            # mismatch after j matches
+            elif i < n and pat[j] != txt[i]:
+                # Do not match lps[0..lps[j-1]] characters,
+                # they will match anyway
+                if j != 0:
+                    j = pi[j-1]
+                else:
+                    i += 1
+        return ret
+            
+        
+        
 
 
 #{ 
