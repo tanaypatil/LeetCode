@@ -17,6 +17,8 @@ class Solution:
                 i = 0
             j += 1
             
+        # print(pi)
+            
         i = 0  # index for txt[]
         j = 0
         ret = []
