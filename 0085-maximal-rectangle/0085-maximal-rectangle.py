@@ -14,30 +14,10 @@ class Solution:
         while stack:
             index, height = stack.popleft()
             max_area = max(max_area, height*(n-index))
-        # print(heights, max_area)
         return max_area
     
     def maximalRectangle(self, mat: List[List[str]]) -> int:
         n, m = len(mat), len(mat[0])
-        # max_area = 0
-        # for i in range(n):
-        #     for j in range(n):
-        #         arr = [0]*(m-j)
-        #         # print(arr)
-        #         # max_area = max(max_area, self.kadane(arr))
-        #         for k in range(i, n):
-        #             c = 0
-        #             s = 0
-        #             gs = 0
-        #             for p in range(j, m):
-        #                 # print(i, j, k, p)
-        #                 arr[c] = 0 if (not int(mat[k][p]) or not arr[c]) and k != i else int(mat[k][p]) + arr[c]
-        #                 s = 0 if not arr[c] else s+arr[c]
-        #                 gs = max(gs, s)
-        #                 c += 1
-        #             max_area = max(max_area, gs)
-        #             # print(i, j, k, arr)
-        # return max_area
         max_area = 0
         height = [0]*(m)
         for row in mat:
