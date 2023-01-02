@@ -28,7 +28,6 @@ class Solution:
                 if j != curr and w and not visited[j]:
                     heappush(heap, (w, j, curr))
                     
-        # print(edges)
         return ans
             
             
