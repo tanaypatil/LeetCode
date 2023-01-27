@@ -4,19 +4,25 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-def iot(root, ret):
+def iot(root, c, k):
     if not root:
-        return
-    iot(root.left, ret)
-    ret.append(root.val)
-    iot(root.right, ret)
+        return -1
+    
+    
+    l = iot(root.left, c, k)
+    if l != -1:
+        return l
+    
+    c[0] += 1
+    if c[0] == k:
+        return root.val
+    
+    r = iot(root.right, c, k)
+    if r != -1:
+        return r
+    return -1
 
 
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        if not root: return -1
-        
-        ret = []
-        iot(root, ret)
-        
-        return ret[k-1]
+        return iot(root, [0], k)
