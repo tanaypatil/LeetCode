@@ -30,23 +30,18 @@ class Solution:
         visited = defaultdict(bool)
         c = -1
         while q:
-            # t = []
             for _ in range(len(q)):
                 node = q.popleft()
                 if not visited[node]:
                     visited[node] = True
                     if node.left:
                         q.append(node.left)
-                        # t.append(node.left.data)
                     if node.right:
                         q.append(node.right)
-                        # t.append(node.right.data)
                     if parentMap[node]:
                         q.append(parentMap[node])
-                        # t.append(parentMap[node].data)
             if not q: break
             c += 1
-            # print(c, t)
             
         return c if c != -1 else 0
 
