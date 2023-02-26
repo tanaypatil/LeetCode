@@ -8,6 +8,7 @@ class Solution:
         for l in range(2, N):
             for i in range(N-l):
                 j = i + l
+                # print(i, j)
                 dp[i][j] = float('inf')
                 for k in range(i+1, j):
                     dp[i][j] = min(dp[i][j], dp[i][k]+dp[k][j]+arr[i]*arr[k]*arr[j])
