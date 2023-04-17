@@ -3,18 +3,17 @@ class Solution:
         stack = []
         total = 0
         
-        for i in range(len(height)):
-            while len(stack) > 0 and height[stack[-1]] < height[i]:
-                poppedIdx = stack.pop()
+        for i, h in enumerate(height):
+            while stack and height[stack[-1]] < h:
+                index = stack.pop()
                 
-                if len(stack) == 0:
+                if not stack:
                     break
                     
-                heightVal = min(height[stack[-1]], height[i]) - height[poppedIdx]
-                # print(heightVal)
-                length = i - stack[-1] - 1
-                total += heightVal * length
-            
+                ch = min(h, height[stack[-1]])-height[index]
+                length = i-stack[-1]-1
+                total += ch * length
+                
             stack.append(i)
-        
         return total
+                
