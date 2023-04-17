@@ -32,5 +32,6 @@ You don't need to read input or print anything. Your task is to complete the fun
 <p><br>
 <span style="font-size:18px"><strong>Constraints:</strong><br>
 1 ≤ |S| ≤ 10<sup>5</sup><br>
-1 ≤ K ≤ 10<sup>5</sup></span></p>
+1 ≤ K ≤ 10<sup>5</sup><br>
+All characters are lowercase latin characters.</span></p>
 </div>
