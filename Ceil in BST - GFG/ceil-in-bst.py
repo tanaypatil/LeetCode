@@ -1,30 +1,23 @@
 #Function to return the ceil of given number in BST.
-from bisect import bisect_left
-
-
-def iot(root, ret):
-    if not root:
-        return
-    iot(root.left, ret)
-    ret.append(root.key)
-    iot(root.right, ret)
-    
 
 class Solution:
+    def find(self, root, inp, res):
+        if not root:
+            return
+        
+        if root.key >= inp:
+            res[0] = min(res[0], root.key)
+        
+        if inp < root.key:
+            self.find(root.left, inp, res)
+        else:
+            self.find(root.right, inp, res)
+        
     def findCeil(self,root, inp):
         # code here
-        ret = []
-        iot(root, ret)
-        
-        if not ret: return -1
-        
-        i = bisect_left(ret, inp)
-        
-        return ret[i]
-            
-        
-            
-        
+        res = [float('inf')]
+        self.find(root, inp, res)
+        return -1 if res[0] == float('inf') else res[0]
 
 
 #{ 
