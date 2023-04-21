@@ -1,18 +1,17 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         s = sum(nums)
-        if s % 2:
+        if s & 1:
             return False
         s //= 2
         prev = [False]*(s+1)
-        dp = [False]*(s+1)
         prev[0] = True
         for i in range(len(nums)):
-            for j in range(s+1):
-                if nums[i] > j: continue
-                if nums[i] == j or prev[j] or prev[j-nums[i]]:
-                    dp[j] = True
-            prev = [dp[j] for j in range(s+1)]
-        return dp[-1]
-        
+            dp = [False]*(s+1)
+            dp[0] = True
+            for j in range(1, s+1):
+                dp[j] = prev[j-nums[i]] or prev[j] if j >= nums[i] else prev[j]
+            prev = dp
+            # print(dp)
+        return prev[-1]
         
