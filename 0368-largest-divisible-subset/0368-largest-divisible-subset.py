@@ -15,9 +15,6 @@ class Solution:
                 ml = dp[i]
                 mi = i
         res = []
-        # print(mi, ml)
-        # print(dp)
-        # print(fr)
         while mi != -1:
             res.append(nums[mi])
             mi = fr[mi]
