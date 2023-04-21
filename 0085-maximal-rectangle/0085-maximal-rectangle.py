@@ -23,6 +23,7 @@ class Solution:
         for row in mat:
             for j in range(m):
                 height[j] = height[j]+1 if row[j] == "1" else 0
+            # print(height)
             max_area = max(max_area, self.largestRectangleArea(height))
         return max_area
             
