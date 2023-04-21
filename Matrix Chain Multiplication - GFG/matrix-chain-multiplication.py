@@ -12,7 +12,7 @@ class Solution:
                 dp[i][j] = float('inf')
                 for k in range(i+1, j):
                     dp[i][j] = min(dp[i][j], dp[i][k]+dp[k][j]+arr[i]*arr[k]*arr[j])
-                    
+            # print(dp)            
         return dp[0][-1]
 
 
