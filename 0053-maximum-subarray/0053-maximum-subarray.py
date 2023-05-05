@@ -3,7 +3,7 @@ class Solution:
         cs, gs = 0, float('-inf')
         for num in nums:
             cs += num
-            gs = max(cs, gs)
+            gs = max(gs, cs)
             if cs < 0:
                 cs = 0
         return gs
