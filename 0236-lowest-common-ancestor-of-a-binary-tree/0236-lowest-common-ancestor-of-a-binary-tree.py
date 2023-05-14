@@ -7,19 +7,21 @@
 def lca(root, p, q, res):
     if not root:
         return False
-    left = lca(root.left, p, q, res)
-    right = lca(root.right, p, q, res)
+    
+    left, right = lca(root.left, p, q, res), lca(root.right, p, q, res)
+    
     if left and right and not res[0]:
         res[0] = root
         return True
-    if (left or right) and (root.val==p.val or root.val==q.val) and not res[0]:
+    
+    if (left or right) and (root.val == p.val or root.val == q.val) and not res[0]:
         res[0] = root
         return True
     
-    if left or right or root.val == p.val or root.val == q.val:
+    if root.val == p.val or root.val == q.val:
         return True
-    # print(root.val, left, right, res)
-    return False
+    
+    return left or right
 
 
 class Solution:
