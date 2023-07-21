@@ -1,7 +1,6 @@
 class Solution:
     def check(self, nums: List[int]) -> bool:
-        i = 0
-        f = 0
+        i = f = 0
         for i in range(len(nums)-1):
             if nums[i+1] < nums[i]:
                 f = 1
