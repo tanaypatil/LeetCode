@@ -5,10 +5,8 @@ class Solution:
         while l < r:
             m = l + (r-l)//2
             if nums[m-1] < nums[m] > nums[m+1]:
-                # print(m-1, m, m+1)
-                # print(nums[m-1], nums[m], nums[m+1])
                 return m-1
-            elif nums[m] < nums[m-1]:
+            elif nums[m-1] > nums[m+1]:
                 r = m
             else:
                 l = m + 1
