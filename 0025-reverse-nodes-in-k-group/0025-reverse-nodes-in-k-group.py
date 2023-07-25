@@ -4,24 +4,16 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
-        if not head or not head.next:
+    def reverseK(self, head, n, k):
+        if not head or not head.next or n < k:
             return head
         t = head
-        x = head
-        l = 0
-        while x:
-            l += 1
-            x = x.next
-        if k > l:
-            return head
         for i in range(k-1):
             t = t.next
         nex = t.next
-        nexl = self.reverseKGroup(nex, k)
+        nexl = self.reverseK(nex, n-k, k)
         t.next = None
         
-        s = head
         p = None
         t = head
         
@@ -33,3 +25,12 @@ class Solution:
         
         head.next = nexl
         return p
+    
+    
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        l = 0
+        t = head
+        while t:
+            l += 1
+            t = t.next
+        return self. reverseK(head, l, k)
