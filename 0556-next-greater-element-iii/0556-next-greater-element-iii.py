@@ -24,7 +24,6 @@ class Solution:
     def nextGreaterElement(self, n: int) -> int:
         if n >= 2**31:
             return -1
-        print(2**31)
         nums = list(map(int, list(str(n))))
         next_num = nums[:]
         self.nextPermutation(next_num)
