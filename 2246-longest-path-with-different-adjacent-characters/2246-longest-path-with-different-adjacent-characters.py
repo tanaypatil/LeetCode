@@ -12,10 +12,9 @@ class Solution:
                     elif len(child_path) > len(children[1]):
                         children[1] = child_path
         
-        pre, post = children
-        Solution.max_path = max(Solution.max_path, len(pre+post)+1)
+        Solution.max_path = max(Solution.max_path, len(children[0]+children[1])+1)
         
-        return pre+Solution.word[i]
+        return children[0]+Solution.word[i]
                 
         
     def longestPath(self, parent: List[int], s: str) -> int:
