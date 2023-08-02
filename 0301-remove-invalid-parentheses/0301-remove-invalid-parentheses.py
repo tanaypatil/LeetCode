@@ -25,7 +25,8 @@ class Solution:
             else:
                 dfs(i+1, path+s[i], stack)
                 return
-            dfs(i+1, path, stack)
+            if i-len(path) < self.min_removals:
+                dfs(i+1, path, stack)
         
         dfs(0, "", [])
         return self.ans
