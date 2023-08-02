@@ -12,10 +12,6 @@ class Solution:
                 else:
                     i, c = stack.pop()
                     final[i] = c
-                    
-        # while stack:
-        #     i, c = stack.pop()
-        #     final[i] = "*"
         
         ans = ""
         for f in final:
