@@ -15,6 +15,9 @@ class Solution:
                     self.min_removals = min(removals, self.min_removals)
                 return
             
+            if (i, path) in self.mem:
+                return
+            
             if s[i] == "(":
                 dfs(i+1, path+s[i], stack+[s[i]])
             elif s[i] == ")":
@@ -23,9 +26,13 @@ class Solution:
             else:
                 dfs(i+1, path+s[i], stack)
                 return
+            
             if i-len(path) < self.min_removals:
                 dfs(i+1, path, stack)
+                
+            self.mem[(i, path)] = True
         
+        self.mem = {}
         dfs(0, "", [])
         return self.ans
                         
