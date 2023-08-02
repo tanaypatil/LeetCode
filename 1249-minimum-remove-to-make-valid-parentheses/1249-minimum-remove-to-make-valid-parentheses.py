@@ -5,15 +5,17 @@ class Solution:
         for i, c in enumerate(s):
             if c == "(":
                 stack.append((i, c))
+                final[i] = "*"
             elif c == ")":
                 if not stack:
                     final[i] = "*"
                 else:
-                    stack.pop()
+                    i, c = stack.pop()
+                    final[i] = c
                     
-        while stack:
-            i, c = stack.pop()
-            final[i] = "*"
+        # while stack:
+        #     i, c = stack.pop()
+        #     final[i] = "*"
         
         ans = ""
         for f in final:
