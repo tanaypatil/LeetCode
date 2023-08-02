@@ -19,9 +19,7 @@ class Solution:
                 dfs(i+1, path+s[i], stack+[s[i]])
             elif s[i] == ")":
                 if stack:
-                    stack.pop()
-                    dfs(i+1, path+s[i], stack)
-                    stack.append("(")
+                    dfs(i+1, path+s[i], stack[:-1])
             else:
                 dfs(i+1, path+s[i], stack)
                 return
