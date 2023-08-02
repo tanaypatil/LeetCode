@@ -22,7 +22,6 @@ class Solution:
                     else:
                         invalid += 1
                     closingPCount = 0
-            # print(stack, closingPCount)
         if closingPCount == 1:
             invalid += 1
             if stack:
