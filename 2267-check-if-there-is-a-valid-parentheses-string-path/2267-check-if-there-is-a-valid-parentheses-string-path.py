@@ -1,7 +1,7 @@
 class Solution:
     def hasValidPath(self, grid: List[List[str]]) -> bool:
         
-        @cache
+        @lru_cache(None)
         def dfs(i, j, stack):
             if i == len(grid)-1 and j == len(grid[0])-1:
                 return len(stack) == 1 and grid[i][j] == ")"
