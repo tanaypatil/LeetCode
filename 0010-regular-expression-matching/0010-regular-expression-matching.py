@@ -16,7 +16,9 @@ class Solution:
                 if p[i] == s[j] or p[i] == ".":
                     dp[j] = prev[-1][j-1]
                 elif p[i] == "*":
-                    dp[j] = prev[-1][j] or prev[-2][j] or ((prev[-1][j-1] or dp[j-1]) and (s[j] == p[i-1] or p[i-1] == "."))
+                    dp[j] = prev[-1][j] or prev[-2][j]
+                    if (s[j] == p[i-1] or p[i-1] == "."):
+                        dp[j] = dp[j] or prev[-1][j-1] or dp[j-1]
                     
             prev[0] = prev[1]
             prev[1] = dp
