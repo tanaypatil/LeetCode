@@ -12,5 +12,5 @@ class Solution:
                 if p[i] == s[j] or p[i] == ".":
                     dp[i][j] = dp[i-1][j-1]
                 elif p[i] == "*":
-                    dp[i][j] = dp[i-1][j] or dp[i-2][j] or ((dp[i-1][j-1] or dp[i][j-1]) and s[j] == p[i-1]) or (p[i-1] == "." and (dp[i-1][j-1] or dp[i][j-1]))
+                    dp[i][j] = dp[i-1][j] or dp[i-2][j] or ((dp[i-1][j-1] or dp[i][j-1]) and (s[j] == p[i-1] or p[i-1] == "."))
         return dp[-1][-1]
