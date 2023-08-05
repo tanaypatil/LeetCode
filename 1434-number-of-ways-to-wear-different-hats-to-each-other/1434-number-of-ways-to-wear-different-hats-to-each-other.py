@@ -10,14 +10,12 @@ class Solution:
         
         @lru_cache(None)
         def dp(i, mask):
-            if mask == (1<<n)-1:
-                return 1
+            if mask == (1<<n)-1: return 1
             if i == 40: return 0
-            cur = 0
+            cur = dp(i+1, mask)
             for j in people[i]:
                 if not (mask & (1 << j)):
                     cur += dp(i+1, mask|1<<j)
-            cur += dp(i+1, mask)
             return cur%MOD
         return dp(0, 0)
         
