@@ -6,7 +6,6 @@ class Solution:
             for hat in hats[i]:
                 people[hat-1].append(i)
         MOD = 10**9+7
-        
         if n > 41: return 0
         
         @lru_cache(None)
