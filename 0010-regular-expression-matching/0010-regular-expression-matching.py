@@ -7,12 +7,9 @@ class Solution:
         prev[1][0] = True
         
         for i in range(1, n+1):
-            
             dp = [False]*(m+1)
             dp[0] = prev[-1][0] or prev[-2][0] if p[i] == "*" else False
-            
             for j in range(1, m+1):
-                
                 if p[i] == s[j] or p[i] == ".":
                     dp[j] = prev[-1][j-1]
                 elif p[i] == "*":
