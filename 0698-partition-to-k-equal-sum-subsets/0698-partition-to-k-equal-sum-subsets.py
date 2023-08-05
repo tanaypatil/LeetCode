@@ -1,18 +1,23 @@
 class Solution:
     def canPartitionKSubsets(self, nums, k):
-        N = len(nums)
-        nums.sort(reverse = True)
-
-        basket, rem = divmod(sum(nums), k)
-        if rem or nums[0] > basket: return False
-
-        dp = [-1] * (1<<N) 
-        dp[0] = 0
-        for mask in range(1<<N):
-            for j in range(N):
-                neib = dp[mask ^ (1<<j)]
-                if mask & (1<<j) and neib >= 0 and neib + nums[j] <= basket:
-                    dp[mask] = (neib + nums[j]) % basket
-                    break
-
-        return dp[-1] == 0
+        n = len(nums)
+        q, r = divmod(sum(nums), k)
+        nums.sort(reverse=True)
+        if r or nums[0] > q: return False
+        
+        def dp(rest_k, mask, cur_sum = 0, next_index = 0):
+            if rest_k == 1:
+                return True
+            
+            if cur_sum == q:
+                return dp(rest_k-1, mask)
+            
+            for i in range(next_index, n):
+                if not (mask & (1 << i)) and nums[i] + cur_sum <= q:
+                    if dp(rest_k, mask | (1 << i), nums[i] + cur_sum, i+1):
+                        return True
+                    if cur_sum == 0:
+                        break
+            return False
+        
+        return dp(k, 0)
