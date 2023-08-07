@@ -2,6 +2,7 @@ class Solution:
     def maxScore(self, nums: List[int]) -> int:
         n = len(nums)
         
+        @lru_cache(None)
         def gcd(a, b):
             if b > a:
                 return gcd(b, a)
