@@ -18,14 +18,11 @@ class Solution:
             
             ans = float('-inf')
             for couple in combinations(list(enumerate(nums)), 2):
-                # print(couple)
-                new_nums = nums[:]
-                new_nums = new_nums[:couple[0][0]] + new_nums[couple[0][0]+1:]
+                new_nums = nums[:couple[0][0]] + nums[couple[0][0]+1:]
                 if couple[0][0] > couple[1][0]:
                     new_nums = new_nums[:couple[1][0]] + new_nums[couple[1][0]+1:]
                 else:
                     new_nums = new_nums[:couple[1][0]-1] + new_nums[couple[1][0]:]
-                # print(new_nums)
                 ans  = max(ans, i * gcd(couple[0][1], couple[1][1]) + dp(i+1, tuple(new_nums)))
                 
             return ans
