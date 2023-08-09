@@ -1,19 +1,8 @@
 class Solution:
-    def dfs(self, i, c, curr, arr, sdict):
-        if i == len(arr):
-            sdict[c].append(curr)
-            return
-        
-        self.dfs(i+1, c+1, curr+arr[i], arr, sdict)
-        self.dfs(i+1, c, curr, arr, sdict)
-        
     def minimumDifference(self, nums: List[int]) -> int:
         sdict2 = defaultdict(list)
         total = sum(nums)
         n, target = len(nums)//2, total//2
-        
-        # self.dfs(0, 0, 0, nums[:n], sdict1)
-        # self.dfs(0, 0, 0, nums[n:], sdict2)
         
         l_iter, r_iter = [(0, 0)], [(0, 0)] # (No. of numbers, sum)
 		
