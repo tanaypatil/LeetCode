@@ -1,8 +1,7 @@
-class Solution:
-        
+class Solution: 
     def maxSumAfterPartitioning(self, nums: List[int], k: int) -> int:
         n = len(nums)
-        
+
         @cache
         def dp(l):
             if l >= n:
