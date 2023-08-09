@@ -2,7 +2,7 @@ class Solution:
     def maxSumAfterPartitioning(self, nums: List[int], k: int) -> int:
         n = len(nums)
 
-        @cache
+        @lru_cache(None)
         def dp(l):
             if l >= n:
                 return 0
