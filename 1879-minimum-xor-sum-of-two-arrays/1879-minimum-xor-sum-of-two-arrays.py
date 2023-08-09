@@ -6,7 +6,6 @@ class Solution:
         def dp(i, mask):
             if i == n:
                 return 0
-            
             ans = float('inf')
             for j in range(n):
                 if not (mask & (1 << j)):
