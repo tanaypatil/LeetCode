@@ -1,6 +1,5 @@
 class Solution:
     def wordBreak(self, s: str, words: List[str]) -> List[str]:
-        visited = defaultdict(bool)
         ans = []
         def dp(s, path):
             if not s:
