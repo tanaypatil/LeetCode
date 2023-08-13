@@ -29,7 +29,6 @@ class Solution:
             dash_count += 1
             traversal = traversal[1:]
         left_t, right_t = self.get_left_and_right(traversal, dash_count)
-        # print(left_t, right_t)
         node.left = self.recoverFromPreorder(left_t)
         node.right = self.recoverFromPreorder(right_t)
         return node
