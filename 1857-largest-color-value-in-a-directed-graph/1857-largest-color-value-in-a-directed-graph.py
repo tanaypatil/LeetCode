@@ -7,6 +7,7 @@ class Solution:
         rec = defaultdict(bool)
         n = len(colors)
         
+        @lru_cache(None)
         def is_cycle(i):
             visited[i] = True
             rec[i] = True
