@@ -1,6 +1,5 @@
 class Solution:
     def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
-        
         moves = [(0, 1), (0, -1), (1, 0), (-1, 0)]
         m, n = len(matrix), len(matrix[0])
         visited = defaultdict(bool)
