@@ -12,7 +12,6 @@ class Solution:
                 else:
                     i, c = stack.pop()
                     final[i] = c
-        
         ans = ""
         for f in final:
             if f != "*":
