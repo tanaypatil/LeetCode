@@ -20,14 +20,11 @@ class Solution:
                     break
             if f: break
         
-        # print(grid)
-        # print(q)
         ans = float('inf')
         visited = defaultdict(bool)
         while q:
             i, j, d = q.popleft()
             visited[(i, j)] = True
-            # print(i, j, d)
             if grid[i][j] == 1:
                 ans = min(ans, d)
                 continue
@@ -36,7 +33,6 @@ class Solution:
                 if 0 <= r < m and 0 <= c < n and grid[r][c] != 2 and not visited[(r, c)]:
                     q.append((r, c, d+1 if not grid[r][c] else d))
                     visited[(r, c)] = True
-            # print(q)
         
         return ans
         
