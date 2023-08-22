@@ -7,20 +7,15 @@ class Solution:
         smap = {}
         max_len = 0
         for i, num in enumerate(nums):
-            # print(i, num)
             cs += num
-            # print(cs, smap)
             if cs == s:
                 max_len = i+1
             elif num == s:
                 max_len = max(max_len, 1)
-            else:
-                if cs-s in smap:
-                    max_len = max(max_len, i-smap[cs-s])
+            elif cs-s in smap:
+                max_len = max(max_len, i-smap[cs-s])
             if cs not in smap:
                 smap[cs] = i
-            # print(max_len)
-            # print("------")
         if not max_len or max_len == len(nums):
             return -1
         
