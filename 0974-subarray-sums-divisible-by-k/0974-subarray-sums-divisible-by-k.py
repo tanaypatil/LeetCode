@@ -4,7 +4,6 @@ class Solution:
         ans = s = 0
         for num in nums:
             s += num
-            if s%k in smap:
-                ans += smap[s%k]
+            ans += smap[s%k] if s%k in smap else 0
             smap[s%k] = smap.get(s%k, 0) + 1
         return ans
