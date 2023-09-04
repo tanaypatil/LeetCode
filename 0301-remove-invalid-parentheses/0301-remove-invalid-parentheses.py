@@ -2,8 +2,8 @@ class Solution:
     def removeInvalidParentheses(self, s: str) -> List[str]:
         self.min_removals = float('inf')
         self.ans = set()
-        
-        def dfs(i, path, stack):
+        stack = []
+        def dfs(i, path):
             if i >= len(s):
                 if not stack:
                     removals = len(s)-len(path)
@@ -19,21 +19,25 @@ class Solution:
                 return
             
             if s[i] == "(":
-                dfs(i+1, path+s[i], stack+[s[i]])
+                stack.append(s[i])
+                dfs(i+1, path+s[i])
+                stack.pop()
             elif s[i] == ")":
                 if stack:
-                    dfs(i+1, path+s[i], stack[:-1])
+                    c = stack.pop()
+                    dfs(i+1, path+s[i])
+                    stack.append(c)
             else:
-                dfs(i+1, path+s[i], stack)
+                dfs(i+1, path+s[i])
                 return
             
             if i-len(path) < self.min_removals:
-                dfs(i+1, path, stack)
+                dfs(i+1, path)
                 
             self.mem[(i, path)] = True
         
         self.mem = {}
-        dfs(0, "", [])
+        dfs(0, "")
         return self.ans
                         
             
