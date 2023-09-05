@@ -5,8 +5,6 @@ class Solution:
         zeroes = 0
         for i, num in enumerate(nums):
             s += num
-            # if i > 0 and not s % k:
-            #     return True
             if (s % k) in smap:
                 if i-smap[s%k] >= 2: return True
             else: smap[s%k] = i
