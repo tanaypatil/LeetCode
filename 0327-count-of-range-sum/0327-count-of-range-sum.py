@@ -2,12 +2,14 @@ class Solution:
     def merge(self, l, m, r):
         merged = []
         lo, hi = m+1, m+1
+        
         for i in range(l, m+1):
             while lo <= r and Solution.nums[lo]-Solution.nums[i] < Solution.lower:
                 lo += 1
             while hi <= r and Solution.nums[hi]-Solution.nums[i] <= Solution.upper:
                 hi += 1
             Solution.count += hi-lo
+        
         i, j = l, m+1
         while i <= m and j <= r:
             if Solution.nums[i] > Solution.nums[j]:
