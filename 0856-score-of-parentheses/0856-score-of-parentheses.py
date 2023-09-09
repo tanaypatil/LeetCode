@@ -17,7 +17,7 @@ class Solution:
                     ans += score
                     # print(ans)
                     score = 1
-        print(s, ans)
+        # print(s, ans)
         return ans
                     
         
