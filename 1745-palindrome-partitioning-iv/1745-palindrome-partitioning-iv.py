@@ -10,11 +10,11 @@ class Solution:
             if not p or i >= n:
                 return False
             
-            
             for j in range(i, n):
                 if s[i:j+1] == s[i:j+1][::-1]:
                     if dfs(j+1, p-1):
                         return True
+                    
             return False
         
         return dfs(0, 3)
