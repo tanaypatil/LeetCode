@@ -3,14 +3,16 @@ class Solution:
         n = len(nums)
 
         @lru_cache(None)
-        def dp(l):
-            if l >= n:
+        def dp(i):
+            if i >= n:
                 return 0
-            m = max_sum = 0
-            for i in range(l, min(n, l+k)):
-                m = max(m, nums[i])
-                max_sum = max(max_sum, m*(i-l+1) + dp(i+1))
-            return max_sum
+            
+            ans = float('-inf')
+            max_in_subarr = float('-inf')
+            for j in range(i, min(i+k, n)):
+                max_in_subarr = max(max_in_subarr, nums[j])
+                ans = max(ans, dp(j+1) + max_in_subarr*(j-i+1))
+            return ans
         
         return dp(0)
         
