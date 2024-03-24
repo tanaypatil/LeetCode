@@ -17,5 +17,6 @@ class Solution:
                 if not (mask & (1 << j)):
                     cur += dp(i+1, mask|1<<j)
             return cur%MOD
+        
         return dp(0, 0)
         
