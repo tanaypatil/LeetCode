@@ -16,6 +16,7 @@ class Solution:
                 if not (mask & (1<<i)) and nums[i] + curr_sum <= q:
                     if dp(left_k, mask | 1<<i, curr_sum + nums[i], i+1):
                         return True
+                    if not curr_sum: break
                     
             return False
         
