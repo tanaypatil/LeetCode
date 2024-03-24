@@ -6,9 +6,6 @@ class Solution:
             indegrees[cur-1] += 1
             adj[pre-1].append(cur-1)
             
-        # print(indegrees, adj)
-        # return 0
-            
         @lru_cache(None)
         def dp(mask, indegs):
             if mask == (1<<n)-1: return 0
