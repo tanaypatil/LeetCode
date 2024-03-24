@@ -2,16 +2,16 @@ class Solution:
     def countArrangement(self, n: int) -> int:
         
         @lru_cache
-        def dp(mask, pl):
-            
-            if pl == 0:
+        def dp(pos, mask=0):
+            if not pos:
                 return 1
-            
+        
             s = 0
+            
             for i in range(n):
-                if not (mask & (1 << i)) and (pl % (i+1) == 0 or (i+1) % pl == 0):
-                    s += dp(mask | (1 << i), pl - 1)
+                if not (mask & 1<<i) and (not (pos % (i+1)) or not ((i+1) % pos)):
+                    s += dp(pos-1, mask | 1<<i)
+            
             return s
         
-        return dp(0, n)
-        
+        return dp(n)
