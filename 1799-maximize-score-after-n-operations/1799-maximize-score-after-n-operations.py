@@ -22,10 +22,6 @@ class Solution:
                 new_nums = list(nums[:])
                 new_nums.pop(couple[0][0])
                 new_nums.pop(couple[1][0] if couple[0][0] > couple[1][0] else couple[1][0]-1)
-                # if couple[0][0] > couple[1][0]:
-                #     new_nums.pop(couple[1][0])
-                # else:
-                #     new_nums.pop(couple[1][0]-1)
                 ans  = max(ans, i * gcd(couple[0][1], couple[1][1]) + dp(i+1, tuple(new_nums)))
                 
             return ans
