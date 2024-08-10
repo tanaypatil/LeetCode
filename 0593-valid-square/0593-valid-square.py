@@ -13,4 +13,4 @@ class Solution:
             get_distance(p3, p4)
         ]
         distances.sort()
-        return Counter(distances[:4])[distances[0]] == 4 and Counter(distances[4:])[distances[4]] == 2 and 2*distances[0] == distances[4] and distances[0] != 0
+        return (distances[0] == distances[1] == distances[2] == distances[3]) and (distances[4] == distances[5]) and (2*distances[0] == distances[4]) and (distances[0] != 0)
