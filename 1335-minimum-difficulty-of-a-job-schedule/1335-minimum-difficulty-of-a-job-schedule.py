@@ -5,17 +5,19 @@ class Solution:
         
         @lru_cache(None)
         def dp(i, d):
+            if i >= n:
+                return 0 if not d else float('inf')
+            
             if d == 1:
                 return max(nums[i:])
             
-            res = float('inf')
-            maxd = 0
-            
-            for j in range(i, n-(d-1)):
-                maxd = max(maxd, nums[j])
-                res = min(res, maxd + dp(j+1, d-1))
-            
-            return res
+            mx = 0
+            ans = float('inf')
+            for j in range(i, n):
+                mx = max(mx, nums[j])
+                ans = min(ans, mx + dp(j+1, d-1))
+            return ans
         
-        return dp(0, d)
+        ans = dp(0, d)
+        return ans if ans != float('inf') else -1
         
