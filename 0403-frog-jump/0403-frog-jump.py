@@ -11,7 +11,5 @@ class Solution:
                     return True
             return False
         
-        exists = {}
-        for i, stone in enumerate(stones):
-            exists[stone] = i
+        exists = {stone:i for i, stone in enumerate(stones)}
         return dp(0, 0)
