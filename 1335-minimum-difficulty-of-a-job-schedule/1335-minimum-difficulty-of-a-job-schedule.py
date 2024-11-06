@@ -5,14 +5,9 @@ class Solution:
         
         @lru_cache(None)
         def dp(i, d):
-            if i >= n:
-                return 0 if not d else float('inf')
-            
-            if d == 1:
-                return max(nums[i:])
-            
-            mx = 0
-            ans = float('inf')
+            if i >= n: return 0 if not d else float('inf')
+            if d == 1: return max(nums[i:])
+            mx, ans = 0, float('inf')
             for j in range(i, n):
                 mx = max(mx, nums[j])
                 ans = min(ans, mx + dp(j+1, d-1))
