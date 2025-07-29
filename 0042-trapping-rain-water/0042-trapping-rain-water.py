@@ -1,19 +1,13 @@
 class Solution:
-    def trap(self, height: List[int]) -> int:
+    def trap(self, heights: List[int]) -> int:
         stack = []
-        total = 0
-        
-        for i, h in enumerate(height):
-            while stack and height[stack[-1]] < h:
-                index = stack.pop()
-                
+        water = 0
+        for index, height in enumerate(heights):
+            while stack and heights[stack[-1]] <= height:
+                i = stack.pop()
                 if not stack:
-                    break
-                    
-                ch = min(h, height[stack[-1]])-height[index]
-                length = i-stack[-1]-1
-                total += ch * length
-                
-            stack.append(i)
-        return total
-                
+                    continue
+                water += (min(heights[stack[-1]], height) - heights[i])  * (index-stack[-1]-1)
+            stack.append(index)
+        return water
+        
