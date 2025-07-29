@@ -1,25 +1,18 @@
-def genSum(arr, target_sum, current_sum, index, current_res, res, memo, im):
-    im[(current_sum, index, tuple(current_res))] = 1
-    if current_sum >= target_sum or index >= len(arr):
-        return
-    
-    if current_sum + arr[index] == target_sum:
-        z = tuple(sorted(current_res+[arr[index]]))
-        if z not in memo:
-            res.append(z)
-            memo[z] = 1
-        
-    if current_sum + arr[index] < target_sum and (current_sum, index+1, tuple(current_res)) not in im:
-        genSum(arr, target_sum, current_sum+arr[index], index+1, current_res+[arr[index]], res, memo, im)
-    genSum(arr, target_sum, current_sum, index+1, current_res, res, memo, im)
-
-
 class Solution:
-    def combinationSum2(self, A: List[int], B: int) -> List[List[int]]:
-        res = []
-        memo = {}
-        im = {}
-        # A = list(set(A))
-        A.sort()
-        genSum(A, B, 0, 0, [], res, memo, im)
-        return res
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        @lru_cache
+        def dfs(i, s, path):
+            if i >= len(candidates):
+                if s == target:
+                    res.add(path)
+                return
+
+            if s + candidates[i] <= target:
+                dfs(i+1, s+candidates[i], tuple(list(path)+[candidates[i]]))
+            dfs(i+1, s, path)
+
+        res = set()
+        candidates.sort()
+        dfs(0, 0, tuple())
+        return list(res)
+        
