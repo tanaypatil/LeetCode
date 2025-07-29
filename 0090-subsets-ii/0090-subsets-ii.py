@@ -1,15 +1,15 @@
-def genSets(arr, index, res, path):
-    if index >= len(arr):
-        return
-    res.add(tuple(path+[arr[index]]))
-    genSets(arr, index+1, res, path+[arr[index]])
-    genSets(arr, index+1, res, path)
-
-    
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
-        res = set()
+        n = len(nums)
+        ans = set()
         nums.sort()
-        genSets(nums, 0, res, [])
-        res.add(tuple([]))
-        return res
+        for i in range(0, 2**n):
+            bits = bin(i)[2:]
+            bits = "0"*(n-len(bits)) + bits
+            curr = []
+            for j in range(n):
+                if bits[j] == "1":
+                    curr.append(nums[j])
+            ans.add(tuple(curr))
+        return list(map(list, ans))
+        
