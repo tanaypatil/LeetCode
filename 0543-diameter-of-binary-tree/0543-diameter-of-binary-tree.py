@@ -4,17 +4,15 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-def treeDiam(root, diam):
-    if not root:
-        return -1
-    l = treeDiam(root.left, diam) + 1
-    r = treeDiam(root.right, diam) + 1
-    diam[0] = max(diam[0], l+r)
-    return max(l, r)
-    
-
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        diam = [0]
-        treeDiam(root, diam)
-        return diam[0]
+        def dfs(root):
+            if not root:
+                return 0
+            left, right = dfs(root.left), dfs(root.right)
+            ans[0] = max(ans[0], 1 + left + right)
+            return max(left, right) + 1
+        ans = [0]
+        dfs(root)
+        return ans[0]-1
+        
