@@ -1,16 +1,12 @@
-from collections import defaultdict
-
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        l = 0
-        counter = Counter()
-        ml = 0
+        counts = Counter()
+        l = ans = 0
         for r in range(len(s)):
-            counter[s[r]] += 1
-            while l < r and counter[s[r]] > 1:
-                counter[s[l]] -= 1
+            counts[s[r]] += 1
+            while counts[s[r]] > 1:
+                counts[s[l]] -= 1
                 l += 1
-            ml = max(ml, r-l+1)
-        return ml
-                
-                
+            ans = max(ans, r-l+1)
+        return ans
+        
