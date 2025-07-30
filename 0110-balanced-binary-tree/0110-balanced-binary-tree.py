@@ -5,18 +5,11 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isHB(self, root):
-        if not root:
-            return True, 0
-        leftb, lefth = self.isHB(root.left)
-        rightb, righth = self.isHB(root.right)
-        
-        if leftb and rightb and abs(lefth-righth) <= 1:
-            return True, max(lefth, righth) + 1
-        
-        return False, max(lefth, righth) + 1
-    
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        return self.isHB(root)[0]
-        
+        def dfs(root):
+            if not root:
+                return True, 0
+            left, right = dfs(root.left), dfs(root.right)
+            return right[0] and left[0] and abs(left[1]-right[1]) <= 1, 1 + max(left[1], right[1])
+        return dfs(root)[0]
         
