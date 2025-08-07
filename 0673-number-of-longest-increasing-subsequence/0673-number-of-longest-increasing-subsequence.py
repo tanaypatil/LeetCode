@@ -8,9 +8,7 @@ class Solution:
                 if nums[i]>nums[j]:
                     if 1+dp[j]>dp[i]:
                         dp[i]=dp[j]+1
-
                         count[i]=count[j]
-
                     elif dp[j]+1==dp[i]:
                         count[i]+=count[j]
         longest_len=max(dp)
