@@ -9,13 +9,15 @@ class Solution:
             return isPalindrome(l+1, r-1)
         
         @lru_cache(None)
-        def dp(i):  # s[i..n-1]
-            if i == n:
+        def dfs(i):
+            if i >= n:
                 return 0
-            ans = math.inf
+            ans = float('inf')
             for j in range(i, n):
-                if (isPalindrome(i, j)):
-                    ans = min(ans, dp(j+1) + 1)
+                if isPalindrome(i, j):
+                    ans = min(ans, 1 + dfs(j+1))
+            
             return ans
         
-        return dp(0) - 1
+        return dfs(0) - 1
+        
