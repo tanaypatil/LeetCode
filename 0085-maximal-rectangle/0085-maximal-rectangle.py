@@ -1,30 +1,23 @@
 class Solution:
     def largestRectangleArea(self, heights: List[int]) -> int:
-        max_area = 0
-        stack = deque()
-        n = len(heights)
-        for i, h in enumerate(heights):
-            start = i
-            while stack and stack[0][1] > h:
-                index, height = stack.popleft()
-                max_area = max(max_area, height*(i-index))
-                start = index
-            stack.appendleft((start, h))
-        
+        stack, max_height = [], 0
+        for index, height in enumerate(heights):
+            start = index
+            while stack and stack[-1][1] >= height:
+                pidx, h = stack.pop()
+                max_height = max(max_height, h*(index-pidx))
+                start = pidx
+            stack.append((start, height))
         while stack:
-            index, height = stack.popleft()
-            max_area = max(max_area, height*(n-index))
-        return max_area
+            i, h = stack.pop()
+            max_height = max(max_height, (len(heights)-i)*h)
+        return max_height
     
-    def maximalRectangle(self, mat: List[List[str]]) -> int:
-        n, m = len(mat), len(mat[0])
-        max_area = 0
-        height = [0]*(m)
-        for row in mat:
-            for j in range(m):
-                height[j] = height[j]+1 if row[j] == "1" else 0
-            # print(height)
-            max_area = max(max_area, self.largestRectangleArea(height))
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
+        curr_row = list(map(int, matrix[0]))
+        max_area = self.largestRectangleArea(curr_row)
+        for r in range(1, len(matrix)):
+            for c in range(len(matrix[0])):
+                curr_row[c] = curr_row[c] + int(matrix[r][c]) if int(matrix[r][c]) else 0
+            max_area = max(max_area, self.largestRectangleArea(curr_row))
         return max_area
-            
-        
