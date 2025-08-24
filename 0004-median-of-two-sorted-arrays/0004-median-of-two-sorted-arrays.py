@@ -5,25 +5,27 @@ class Solution:
         if n > m:
             return self.findMedianSortedArrays(nums2, nums1)
         
-        lo, hi = 0, n
         mid = (n+m+1)//2
+        l, r = 0, n
         
-        while lo <= hi:
-            cut1 = (hi+lo)//2
-            cut2 = mid-cut1
-            
+        while l <= r:
+            cut1 = l + (r-l)//2
+            cut2 = mid - cut1
             l1 = nums1[cut1-1] if cut1 > 0 else float('-inf')
             l2 = nums2[cut2-1] if cut2 > 0 else float('-inf')
             r1 = nums1[cut1] if cut1 < n else float('inf')
             r2 = nums2[cut2] if cut2 < m else float('inf')
             
             if l1 > r2:
-                hi = cut1-1
+                r = cut1-1
             elif l2 > r1:
-                lo = cut1+1
+                l = cut1+1
             else:
                 if (n+m) & 1:
                     return max(l1, l2)
-                return (max(l1, l2) + min(r1, r2))/ 2.0
+                else:
+                    return (max(l1, l2) + min(r1, r2)) / 2
+                
         return -1
+                
         
