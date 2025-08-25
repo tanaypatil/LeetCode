@@ -1,22 +1,12 @@
 class Solution:
-    def dfs(self, m, n, r, c):
-        if r == m-1 and c == n-1:
-            return Solution.grid[-1][-1]
-        if (r, c) in Solution.mem:
-            return Solution.mem[(r, c)]
-        ans = float('inf')
-        for di, dj in Solution.moves:
-            i, j = r+di, c+dj
-            if 0 <= i < m and 0 <= j < n:
-                ans = min(ans, self.dfs(m, n, i, j))
-        Solution.mem[(r, c)] = ans + Solution.grid[r][c]
-        return ans + Solution.grid[r][c]
-        
-
     def minPathSum(self, grid: List[List[int]]) -> int:
-        Solution.grid = grid
-        Solution.moves = [(0, 1), (1, 0)]
-        Solution.mem = {}
-        if not grid:
-            return 0
-        return self.dfs(len(grid), len(grid[0]), 0, 0)
+        m, n = len(grid), len(grid[0])
+        dp = [grid[0][0]]
+        for j in range(1, n):
+            dp.append(dp[-1]+grid[0][j])
+        
+        for i in range(1, m):
+            dp[0] += grid[i][0]
+            for j in range(1, n):
+                dp[j] = min(dp[j], dp[j-1]) + grid[i][j]
+        return dp[-1]
