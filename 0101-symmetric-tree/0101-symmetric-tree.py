@@ -4,15 +4,18 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-def symTree(root1, root2):
-    if not root1 and not root2:
-        return True
-    if not root1 or not root2:
-        return False
-    return root1.val == root2.val and symTree(root1.left, root2.right) and symTree(root1.right, root2.left)
-
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         if not root:
-            return True
-        return symTree(root.left, root.right)
+            return root
+        
+        def dfs(p, q):
+            if not p and not q:
+                return True
+            
+            if not p or not q:
+                return False
+            
+            return p.val == q.val and dfs(p.left, q.right) and dfs(p.right, q.left)
+        
+        return dfs(root.left, root.right)
