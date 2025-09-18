@@ -1,38 +1,25 @@
-from bisect import bisect
-
-
 class MedianFinder:
 
     def __init__(self):
-        ### max heap to store the first half of the list
-        self.maxHeap = []
-        ### min heap to store the second half of the list
-        self.minHeap = []
+        self.min_heap = []
+        self.max_heap = []
+        
 
     def addNum(self, num: int) -> None:
-        ### push num into the correct heap
-        if not self.maxHeap or num <= -self.maxHeap[0]:
-            heappush(self.maxHeap, -num)
+        if not self.max_heap or num < -self.max_heap[0]:
+            heappush(self.max_heap, -num)
         else:
-            heappush(self.minHeap, num)
-        
-        ### banance the two heaps so that each of them representing half of the list
-        ### for odd length list, len(maxHeap) == len(minHeap)+1
-        ### for even length list, len(maxHeap) == len(minHeap)
-        if len(self.minHeap) > len(self.maxHeap):
-            heappush(self.maxHeap, -heappop(self.minHeap)) 
-        elif len(self.maxHeap) > len(self.minHeap)+1:
-            heappush(self.minHeap, -heappop(self.maxHeap)) 
+            heappush(self.min_heap, num)
+            
+        if len(self.max_heap) > len(self.min_heap) + 1:
+            heappush(self.min_heap, -heappop(self.max_heap))
+        if len(self.min_heap) > len(self.max_heap):
+            heappush(self.max_heap, -heappop(self.min_heap))
 
     def findMedian(self) -> float:
-        
-        ### if the length of entire list is even, 
-        ### get the mean of the two middle values
-        if (len(self.maxHeap)+len(self.minHeap))%2==0:
-            return (-self.maxHeap[0]+self.minHeap[0])/2
-        
-        ### when odd, we know that the median is in maxHeap
-        return -self.maxHeap[0]
+        if (len(self.max_heap) + len(self.min_heap)) & 1:
+            return -self.max_heap[0]
+        return (-self.max_heap[0] + self.min_heap[0]) / 2
 
 
 # Your MedianFinder object will be instantiated and called as such:
