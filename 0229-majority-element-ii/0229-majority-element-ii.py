@@ -1,37 +1,34 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> List[int]:
         firstMajor = secondMajor = float('inf')
-        firstSum = secondSum = 0
-        
-        res = []
-        
+        firstCount = secondCount = 0
+        n = len(nums)
         for num in nums:
             if num == firstMajor:
-                firstSum += 1
+                firstCount += 1
             elif num == secondMajor:
-                secondSum += 1
-            elif firstSum == 0:
-                firstSum = 1
+                secondCount += 1
+            elif firstCount == 0:
                 firstMajor = num
-            elif secondSum == 0:
-                secondSum = 1
+                firstCount = 1
+            elif secondCount == 0:
                 secondMajor = num
+                secondCount = 1
             else:
-                firstSum -= 1
-                secondSum -= 1
-                
-        fs = ss = 0
+                firstCount -= 1
+                secondCount -= 1
         
+        firstCount = secondCount = 0
         for num in nums:
             if num == firstMajor:
-                fs += 1
-            if num == secondMajor:
-                ss += 1
-        n = len(nums)        
-        if fs > n//3:
-            res.append(firstMajor)
-            
-        if ss > n//3:
-            res.append(secondMajor)
-            
-        return res
+                firstCount += 1
+            elif num == secondMajor:
+                secondCount += 1
+        
+        ret = []
+        if firstCount > n//3:
+            ret.append(firstMajor)
+        if secondCount > n//3:
+            ret.append(secondMajor)
+        return ret
+        
