@@ -1,13 +1,13 @@
 class Solution:
-    def sumSubarrayMins(self, A: List[int]) -> int:
-        A = [0]+A
-        result = [0]*len(A)
+    def sumSubarrayMins(self, arr: List[int]) -> int:
+        arr = [0] + arr
+        mins = [0]
         stack = [0]
-        for i in range(len(A)):
-            while A[stack[-1]] > A[i]:
-                stack.pop() 
-            j = stack[-1]
-            result[i] = result[j] + (i-j)*A[i]
+        
+        for i in range(1, len(arr)):
+            while stack and arr[stack[-1]] >= arr[i]:
+                stack.pop()
+            mins.append((arr[i] * (i-stack[-1])) + mins[stack[-1]])
             stack.append(i)
-        return sum(result) % (10**9+7)
+        return sum(mins)%(10**9+7)
         
