@@ -4,15 +4,16 @@ class Solution:
         def dfs(i, s, path):
             if i >= len(candidates):
                 if s == target:
-                    res.add(path)
+                    l = path.strip().split(",")
+                    res.add(tuple(map(int, [x for x in l if x != ''])))
                 return
 
             if s + candidates[i] <= target:
-                dfs(i+1, s+candidates[i], tuple(list(path)+[candidates[i]]))
+                dfs(i+1, s+candidates[i], path + "," + str(candidates[i]))
             dfs(i+1, s, path)
 
         res = set()
         candidates.sort()
-        dfs(0, 0, tuple())
+        dfs(0, 0, "")
         return list(res)
         
