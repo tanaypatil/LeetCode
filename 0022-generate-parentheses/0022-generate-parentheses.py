@@ -8,13 +8,12 @@ class Solution:
                 return
             
             if s.count("(") < n:
-                dfs(s + "(", stack + ["("])
+                dfs(s + "(", stack + "(")
             if stack:
-                stack.pop()
-                dfs(s + ")", stack)
+                dfs(s + ")", stack[:-1])
 
         ans = []
-        dfs("", [])
+        dfs("", "")
         return ans
 
         
