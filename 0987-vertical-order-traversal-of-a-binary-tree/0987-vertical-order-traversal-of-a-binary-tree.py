@@ -4,26 +4,20 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from collections import defaultdict
-
-
-def vt(root, res, h, b):
-    if not root:
-        return
-    res[h].append((root.val, b))
-    if root.left:
-        vt(root.left, res, h-1, b+1)
-    if root.right:
-        vt(root.right, res, h+1, b+1)
-
-
 class Solution:
     def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
-        res = defaultdict(list)
-        vt(root, res, 0, 0)
-        ret = []
-        for k in sorted(res.keys()):
-            res[k].sort(key=lambda x: (x[1], x[0]))
-            t = [x[0] for x in res[k]]
-            ret.append(t)
-        return ret
+        if not root:
+            return []
+        
+        levels = defaultdict(list)
+        q = deque({(root, 0, 0)})
+        
+        while q:
+            node, vl, bl = q.popleft()
+            levels[vl].append((node.val, bl))
+            if node.left:
+                q.append((node.left, vl-1, bl+1))
+            if node.right:
+                q.append((node.right, vl+1, bl+1))
+        return [[v for v, b in sorted(levels[vl], key= lambda x: (x[1], x[0]))] for vl in sorted(levels.keys())]
+            
