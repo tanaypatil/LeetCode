@@ -1,35 +1,23 @@
 class Solution:
-    
     def countPaths(self, n: int, roads: List[List[int]]) -> int:
-        if not roads:
-            return 1
-        
-        adj = defaultdict(dict)
-        
-        for src, dest, time in roads:
-            adj[src][dest] = time
-            adj[dest][src] = time
-        
-        times = [float('inf')]*n
-        times[0] = 0
+        adj = defaultdict(list)
+        for u, v, t in roads:
+            adj[u].append((v, t))
+            adj[v].append((u, t))
+            
         heap = [(0, 0)]
-        min_time = float('inf')
-        
         ways = [0]*n
         ways[0] = 1
-        MOD = 10**9+7
+        dist = [float('inf')]*n
+        dist[0] = 0
         while heap:
-            time, city = heappop(heap)
-            for c, t in adj[city].items():
-                if t + time < min_time and t+time < times[c]:
-                    times[c] = t+time
-                    heappush(heap, (times[c], c))
-                    ways[c] = ways[city]%MOD
-                elif times[c] == t+time:
-                    ways[c] = (ways[c]%MOD + ways[city]%MOD)%MOD
-                    
-        return ways[n-1]%MOD
-        
-        
-        
+            time, road = heappop(heap)
+            for nex, t in adj[road]:
+                if t + time < dist[nex]:
+                    dist[nex] = t + time
+                    ways[nex] = ways[road]
+                    heappush(heap, (t+time, nex))
+                elif t + time == dist[nex]:
+                    ways[nex] += ways[road]
+        return ways[n-1]%(10**9+7)
         
