@@ -1,13 +1,15 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        dp = [[0 for i in range(len(prices) + 2)] for x in range(2)]
         
-		# Bottom Up so start from last day to first
-        for i in range(len(prices) - 1, -1, -1):
-			# Use our DP Formulas !!!!!
-            dp[0][i] = max(-prices[i] + dp[1][i + 1], dp[0][i + 1])
-            dp[1][i] = max(prices[i] + dp[0][i + 2], dp[1][i + 1])
-		# We want to return the max for BUYING at Day 0
-		# We can't sell if we haven't bought a stock yet. (Requirement #2)
-        return dp[0][0]
+        @lru_cache(None)
+        def dp(day, last_action):
+            if day >= len(prices): return 0
+            profit = dp(day+1, last_action)
+            if last_action == "sell":
+                profit = max(profit, dp(day+1, "buy") - prices[day])
+            else:
+                profit = max(profit, dp(day+2, "sell") + prices[day])
+            return profit
+        
+        return dp(0, "sell")
         
