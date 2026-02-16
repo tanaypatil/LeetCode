@@ -1,26 +1,27 @@
 class Solution:
     def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, dst: int, k: int) -> int:
-        neis = collections.defaultdict(list)
-        for f, t, p in flights:
-            neis[f].append((t, p))
-            
+        adj = defaultdict(list)
+        for i, j, p in flights:
+            adj[i].append((j, p))
+
+        seenstops = {}
         heap = [(0, k, src)]
-        seen_stops = collections.defaultdict(int)
 
         while heap:
-            totalP, stops, city = heapq.heappop(heap)
+            price, stops, city = heappop(heap)
+
             if city == dst:
-                return totalP
+                return price
+
             if stops < 0:
                 continue
-            if city in seen_stops and seen_stops[city] >= stops:
+
+            if city in seenstops and seenstops[city] >= stops:
                 continue
-            seen_stops[city] = stops
-            
-            for nei, neiP in neis[city]:
-                heapq.heappush(heap, (totalP + neiP, stops - 1, nei))
-        
-        return -1 
-                
-            
-        
+
+            seenstops[city] = stops
+
+            for next_city, next_price in adj[city]:
+                heappush(heap, (price+next_price, stops-1, next_city))
+
+        return -1
