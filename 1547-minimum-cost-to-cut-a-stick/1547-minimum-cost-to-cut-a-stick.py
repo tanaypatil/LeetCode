@@ -1,10 +1,15 @@
 class Solution:
-    def minCost(self, n: int, A: List[int]) -> int:
-        A = sorted(A + [0, n])
-        k = len(A)
-        dp = [[0] * k for _ in range(k)]
-        for d in range(2, k):
-            for i in range(k - d):
-                dp[i][i + d] = min(dp[i][m] + dp[m][i + d] for m in range(i + 1, i + d)) + A[i + d] - A[i]
-        return dp[0][k - 1]
+    def minCost(self, n: int, cuts: List[int]) -> int:
         
+        @lru_cache(None)
+        def dp(l, r):
+            if r-l == 1:
+                return 0
+            
+            ans = float('inf')
+            for cut in cuts:
+                if l < cut < r:
+                    ans = min(ans, (r-l) + dp(l, cut) + dp(cut, r))
+            return ans if ans != float('inf') else 0
+        
+        return dp(0, n)
