@@ -16,10 +16,5 @@ class Solution:
                 if dist[t] > w + we:
                     dist[t] = w + we
                     heappush(heap, (dist[t], t))
-                    
-        for i in range(n):
-            if dist[i] == float('inf'):
-                return -1
-                
-        return max(dist)
-        
+        max_dist = max(dist)
+        return -1 if max_dist == float('inf') else max_dist 
